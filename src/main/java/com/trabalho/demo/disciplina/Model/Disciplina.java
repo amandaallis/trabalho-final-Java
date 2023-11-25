@@ -1,4 +1,4 @@
-package com.trabalho.demo.disciplinas.Model;
+package com.trabalho.demo.disciplina.Model;
 
 import jakarta.persistence.*;
 

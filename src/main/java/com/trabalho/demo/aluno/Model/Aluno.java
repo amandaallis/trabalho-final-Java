@@ -1,9 +1,7 @@
 package com.trabalho.demo.aluno.Model;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.trabalho.demo.cursos.Model.Cursos;
+import com.trabalho.demo.curso.Model.Curso;
 import jakarta.persistence.*;
-
 import java.io.Serializable;
 
 @Entity
@@ -18,13 +16,13 @@ public class Aluno implements Serializable {
     private String nome;
     @Column(name = "cpf")
     private String cpf;
-    @Column(name="cidade")
+    @Column(name = "cidade")
     private String cidade;
 
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cursos")
-    private Cursos cursos;
+    private Curso cursos;
 
     public Integer getId() {
         return id;
@@ -58,11 +56,11 @@ public class Aluno implements Serializable {
         this.cidade = cidade;
     }
 
-    public Cursos getCursos() {
+    public Curso getCursos() {
         return cursos;
     }
 
-    public void setCursos(Cursos cursos) {
+    public void setCursos(Curso cursos) {
         this.cursos = cursos;
     }
 

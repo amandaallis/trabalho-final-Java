@@ -1,15 +1,14 @@
-package com.trabalho.demo.cursos.Model;
+package com.trabalho.demo.curso.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.trabalho.demo.disciplinas.Model.Disciplina;
+import com.trabalho.demo.disciplina.Model.Disciplina;
 import jakarta.persistence.*;
-import org.hibernate.annotations.Cascade;
 
 import java.io.Serializable;
 @Entity
 @Table(name = "cursos")
 
-public class Cursos implements Serializable {
+public class Curso implements Serializable {
     @Id
     @Column(name = "id")
     private Integer id;
