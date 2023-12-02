@@ -2,6 +2,8 @@ package com.trabalho.demo.aluno.Controller;
 
 import com.trabalho.demo.aluno.Model.Aluno;
 import com.trabalho.demo.aluno.Service.AlunoService;
+import com.trabalho.demo.disciplina.Model.Disciplina;
+import com.trabalho.demo.disciplina.Service.DisciplinaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +20,16 @@ public class AlunoController {
     public AlunoService alunoService;
     @PostMapping()
     private ResponseEntity<Object> novoAluno(@RequestBody Aluno aluno) {
-        alunoService.novoAluno(aluno);
-        return ResponseEntity.status(HttpStatus.OK).body(aluno);
+        System.out.println(aluno);
+        if(aluno.getDisciplina().getId() == null) {
+            return ResponseEntity.status(HttpStatus.OK).body(alunoService.novoAluno(aluno));
+        }
+        Optional<Disciplina> disc = alunoService.buscarIdDisciplina(aluno.getDisciplina().getId());
+        if(disc.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.OK).body(alunoService.novoAluno(aluno));
+        }
+        aluno.setDisciplina(disc.get());
+        return ResponseEntity.status(HttpStatus.OK).body(alunoService.novoAluno(aluno));
     }
 
     @GetMapping()
@@ -43,7 +53,7 @@ public class AlunoController {
 
         Aluno pessoa = alunoEncontrado.get();
 
-        pessoa.setCursos(aluno.getCursos());
+        pessoa.setDisciplina(aluno.getDisciplina());
         pessoa.setNome(aluno.getNome());
         pessoa.setCpf(aluno.getCpf());
         pessoa.setCidade(pessoa.getCidade());

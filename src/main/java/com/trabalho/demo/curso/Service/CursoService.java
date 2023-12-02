@@ -1,7 +1,8 @@
-package com.trabalho.demo.aluno.Service;
+package com.trabalho.demo.curso.Service;
 
-import com.trabalho.demo.aluno.Model.Aluno;
 import com.trabalho.demo.aluno.Repository.AlunoRepository;
+import com.trabalho.demo.curso.Model.Curso;
+import com.trabalho.demo.curso.Repository.CursoRepository;
 import com.trabalho.demo.disciplina.Model.Disciplina;
 import com.trabalho.demo.disciplina.Repository.DisciplinaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,28 +12,28 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AlunoService {
+public class CursoService {
     @Autowired
-    private AlunoRepository repository;
+    private CursoRepository repository;
     @Autowired
     private DisciplinaRepository disciplinaRepository;
 
-    public List<Aluno> listarAlunos() {
+    public List<Curso> encontraCursos() {
         return repository.findAll();
     }
-    public Aluno novoAluno(Aluno aluno) {
-        return repository.save(aluno);
-    }
-    public Optional<Aluno> listarAlunoPorId(Integer id) {
+
+    public Optional<Curso> encontraCursoPorId(Integer id) {
         return repository.findById(id);
     }
-    public void deletaUsuario(Aluno aluno) {
-         repository.delete(aluno);
-    }
+
     public Optional<Disciplina> buscarIdDisciplina(Integer id) {
         return disciplinaRepository.findById(id);
     }
-    public Aluno encontra(Integer id) {
-        return repository.encontraPeloId(id);
+    public Curso novoCurso(Curso curso) {
+        return repository.save(curso);
+    }
+
+    public void deletaCurso(Curso curso) {
+         repository.delete(curso);
     }
 }

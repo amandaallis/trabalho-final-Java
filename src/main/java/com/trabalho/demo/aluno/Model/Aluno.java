@@ -1,8 +1,14 @@
 package com.trabalho.demo.aluno.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.trabalho.demo.curso.Model.Curso;
+import com.trabalho.demo.disciplina.Model.Disciplina;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "alunos")
@@ -19,10 +25,11 @@ public class Aluno implements Serializable {
     @Column(name = "cidade")
     private String cidade;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "cursos")
-    private Curso cursos;
+    @ManyToOne()
+    @JoinColumn(name = "disciplina")
+    @Cascade(CascadeType.ALL)
+    @JsonIgnoreProperties(value = "nome")
+    private Disciplina disciplina;
 
     public Integer getId() {
         return id;
@@ -56,12 +63,12 @@ public class Aluno implements Serializable {
         this.cidade = cidade;
     }
 
-    public Curso getCursos() {
-        return cursos;
+    public Disciplina getDisciplina() {
+        return disciplina;
     }
 
-    public void setCursos(Curso cursos) {
-        this.cursos = cursos;
+    public void setDisciplina(Disciplina disciplina) {
+        this.disciplina = disciplina;
     }
 
     public Aluno() {

@@ -8,14 +8,33 @@ import java.io.Serializable;
 @Table(name = "disciplina")
 public class Disciplina implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    public Integer id;
 
     @Column(name = "name")
-    private String name;
+    public String name;
 
-    @Column(name = "nota")
-    private Float nota;
+    public Disciplina() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+//    @Column(name = "nota")
+//    private Float nota;
 
 //    @OneToMany
 //    @JoinColumn(name = "id")
